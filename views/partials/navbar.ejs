@@ -1,0 +1,95 @@
+<div class="container-fluid fixed-top text-center p-3 bg-white border-bottom border-2">
+    <h1>Note Taking App</h1>
+    <div class="list-group list-group-horizontal">
+        <a href="/" class="btn btn-primary" role="button">Home</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newNoteModal">
+            New Note
+        </button>
+        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Login/Register
+        </button>
+
+    </div>
+</div>
+
+<!-- New Note Modal -->
+
+<div class="modal fade" id="newNoteModal" tabindex="-1" aria-labelledby="newNoteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newNoteModalLabel">New Note</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-control">
+                    <label for="noteTitle"><b>Note Title</b></label>
+                    <input type="text" placeholder="Enter Note Title" name="noteTitle" required>
+                    <br></br>
+                    <label for="content"><b>Content</b></label>
+                    <input type="content" placeholder="Enter Content" name="content" required>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create Note</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login/Register Modal -->
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-control" id="loginForm">
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" id="loginUsername" required>
+                    <br></br>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="loginPassword" required>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#registerModal">Register</button>
+                <button type="submit" id="loginSubmit" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-control" id="registerForm">
+                    <label for="username"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" id="registerUsername" required>
+                    <br></br>
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="registerPassword" required>
+                    <br></br>
+                    <label for="confirmPassword"><b>Confirm Password</b></label>
+                    <input type="password" placeholder="Confirm Password" id="registerConfirmPassword" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="registerSubmit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
