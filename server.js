@@ -23,7 +23,7 @@ app.use(logRequests);
 app.use(errorHandler);
 
 // Serve Static Files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"))); 
 
 // Connect to MongoDB
 connectDB();

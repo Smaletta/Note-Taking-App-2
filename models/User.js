@@ -4,8 +4,7 @@ const bcrypt = require('bcryptjs');
 const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }], // Referencing Note
-});
+    });
 
 // pre middleware
 UserSchema.pre('save', async function (next) {
@@ -19,4 +18,6 @@ UserSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;

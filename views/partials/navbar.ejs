@@ -22,23 +22,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-control">
+                <div class="form-control" id="newNoteForm" action="/create">
                     <label for="noteTitle"><b>Note Title</b></label>
-                    <input type="text" placeholder="Enter Note Title" name="noteTitle" required>
+                    <input type="text" placeholder="Enter Note Title" id="newNoteTitle" required>
                     <br></br>
                     <label for="content"><b>Content</b></label>
-                    <input type="content" placeholder="Enter Content" name="content" required>
+                    <input type="content" placeholder="Enter Content" id="newNoteContent" required>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Create Note</button>
+                <button type="submit" id="newNoteSubmit" class="btn btn-primary">Create Note</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Login/Register Modal -->
+<!-- Login Modal -->
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -48,19 +48,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-control" id="loginForm">
+                <form class="form-control" id="loginForm" onsubmit=login()>
                     <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" id="loginUsername" required>
+                    <input type="text" placeholder="Enter Username" id="loginUsername" name="username" required>
                     <br></br>
                     <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" id="loginPassword" required>
-
-                </div>
+                    <input type="password" placeholder="Enter Password" id="loginPassword" name="password" required>
+                    <br></br>
+                    <input type="submit" id="loginSubmit" class="btn btn-primary" value="Login">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#registerModal">Register</button>
-                <button type="submit" id="loginSubmit" class="btn btn-primary">Login</button>
             </div>
         </div>
     </div>
@@ -76,19 +76,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-control" id="registerForm">
+                <form class="form-control" id="registerForm" onsubmit= "passwordMatch(); return false">
                     <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" id="registerUsername" required>
+                    <input type="text" placeholder="Enter Username" id="registerUsername" name="username" required>
                     <br></br>
                     <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" id="registerPassword" required>
+                    <input type="password" placeholder="Enter Password" id="registerPassword" name="password" required>
                     <br></br>
                     <label for="confirmPassword"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" id="registerConfirmPassword" required>
-                </div>
+                    <input type="password" placeholder="Confirm Password" id="registerConfirmPassword" name="confirmPassword" required>
+                    <br></br>
+                    <input type="submit" id="registerSubmit" class="btn btn-primary" value="Register">
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" id="registerSubmit" class="btn btn-primary">Register</button>
             </div>
         </div>
     </div>

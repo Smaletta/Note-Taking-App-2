@@ -12,29 +12,21 @@
 
 <body>
     <%- include('partials/navbar') %>
-
+        <!-- Splash Screen -->
         <div class="container mt-5 pt-5">
-            <h1 class="mt-5 text-center">Notes</h1>
             <div class="row">
-                <% notes.forEach(note=> { %>
-                    <div class="col-md-4 mb-4">
-                        <div class="card" id="<%= note.id %>">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%= note.title %>
-                                </h5>
-                                <p class="card-text">
-                                    <%= note.content %>
-                                </p>
-                            </div>
+                <div class="col-md-6 offset-md-3">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h1 class="text-center">Welcome to Note Taking App</h1>
+                            <p class="text-center">Create and manage your notes with ease.</p>
                         </div>
                     </div>
-                    <% }) %>
+                </div>
             </div>
         </div>
 
         <%- include('partials/footer') %>
-
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="/js/script.js"></script>
 </body>

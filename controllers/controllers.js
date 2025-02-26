@@ -1,6 +1,10 @@
+const User = require('../models/User');
 const Note = require('../models/Note');
 
-// Retrieve all notes
+// Middleware to find notes associated with user id
+const findNotesbyUserId = require('../middlewares/notes');
+
+// Retrieve all notes by a user
 const getAllNotes = async (req, res) => {
     try {
         const notes = await Note.find();
@@ -10,11 +14,12 @@ const getAllNotes = async (req, res) => {
     }
 };
 
-// Create a new note
+// Create a new note associated with a user 
 const createNote = async (req, res) => {
     try {
         const { title, content } = req.body;
-        const note = await Note.create({ title, content });
+        const user = req.user._id;
+        const note = await Note.create({ title, content, user });
         res.status(201).json({ message: 'Note created successfully', note });
     } catch (error) {
         res.status(400).json({ error: error.message });

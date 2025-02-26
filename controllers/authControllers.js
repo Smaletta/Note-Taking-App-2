@@ -7,6 +7,12 @@ require('dotenv').config();
 const registerUser = async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.message('User already exists');
+        } 
+
         const user = await User.create({ username, password });
         res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
@@ -17,6 +23,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const {username , password } = req.body;
+
+        console.log(username, password);
 
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ message: 'User not found' });
