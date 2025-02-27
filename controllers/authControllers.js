@@ -30,10 +30,8 @@ const loginUser = async (req, res) => {
         const isMatch = await user.comparePassword(password);
         if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN,
-        });
-        res.cookie('token', token);
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, );
+        res.cookie('token', token, { maxAge: parseInt(process.env.JWT_EXPIRES_IN) });
         res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         res.status(500).json({ error: error.message });

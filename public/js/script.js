@@ -43,8 +43,7 @@ async function login() {
         const response = await fetch(`${URL}/api/notes/login`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 username: user,
@@ -66,6 +65,28 @@ async function login() {
 }
 
 
-// // New Note
+// // Create Note
 
-// document.getElementById("newNoteSubmit").addEventListener("click", fetch("/create"));
+async function createNote() {    
+    const title = document.getElementById("newNoteTitle").value;
+    const content = document.getElementById("newNoteContent").value;
+    try {
+        const response = await fetch(`${URL}/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content
+            })
+        })
+        alert(`${(await response.text())}`);
+        if (response.ok) {
+            window.location.reload();
+
+        };
+    } catch (error) {
+        console.error(error);
+    }
+}

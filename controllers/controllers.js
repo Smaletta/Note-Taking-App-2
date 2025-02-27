@@ -1,13 +1,22 @@
 const User = require('../models/User');
 const Note = require('../models/Note');
+const jwt = require('jsonwebtoken');
 
-// Middleware to find notes associated with user id
-const findNotesbyUserId = require('../middlewares/notes');
-
+require('dotenv').config();
 // Retrieve all notes by a user
-const getAllNotes = async (req, res) => {
+
+const findNotesbyUserId = async (req, res) => {
     try {
-        const notes = await Note.find();
+
+        if (req.user.username !== req.params.id) {
+            const error = new Error("Unauthorized: Incorrect username");
+            error.statuscode = 401;
+            res.render('index', { error, notes: [] });
+            return (error);
+          }
+
+        const notes = await Note.find({ user: req.user.id });
+        console.log(notes);
         res.render('index', { notes });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -18,7 +27,7 @@ const getAllNotes = async (req, res) => {
 const createNote = async (req, res) => {
     try {
         const { title, content } = req.body;
-        const user = req.user._id;
+        const user = req.user.id;
         const note = await Note.create({ title, content, user });
         res.status(201).json({ message: 'Note created successfully', note });
     } catch (error) {
@@ -71,4 +80,4 @@ const deleteNote = async (req, res) => {
     }
 };
 
-module.exports = { createNote, getAllNotes, getNoteById, updateNote, deleteNote };
+module.exports = { findNotesbyUserId, createNote, getNoteById, updateNote, deleteNote };

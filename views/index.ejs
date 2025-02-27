@@ -15,22 +15,29 @@
 
         <div class="container mt-5 pt-5">
             <h1 class="mt-5 text-center">Notes</h1>
-            <div class="row">
-                <% notes.forEach(note=> { %>
-                    <div class="col-md-4 mb-4">
-                        <div class="card" id="<%= note.id %>">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%= note.title %>
-                                </h5>
-                                <p class="card-text">
-                                    <%= note.content %>
-                                </p>
+            <% if (typeof error !=="undefined" ) { %>
+                <div class="alert alert-danger text-center text-bg-danger" id="message-warning">
+                    <h3>
+                        <%= error.message %>
+                    </h3>
+                </div>
+                <% } %>
+                    <div class="row">
+                        <% notes.forEach(note=> { %>
+                            <div class="col-md-4 mb-4">
+                                <div class="card" id="<%= note.id %>">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= note.title %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <%= note.content %>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <% }) %>
                     </div>
-                    <% }) %>
-            </div>
         </div>
 
         <%- include('partials/footer') %>

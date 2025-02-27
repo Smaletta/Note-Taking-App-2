@@ -5,6 +5,7 @@ const isAuthenticated = (req, res, next) => {
   if (!token) {
     const error = new Error("Unauthorized: No token provided");
     error.statuscode = 401;
+    res.render('index', { error });
     return next(error);
   }
 
@@ -15,6 +16,7 @@ const isAuthenticated = (req, res, next) => {
   } catch (error) {
     error.message = "Invalid token";
     error.statuscode = 403;
+    res.render('index', { error });
     return next(error);
   }
 };

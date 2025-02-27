@@ -22,17 +22,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-control" id="newNoteForm" action="/create">
+                <form class="form-control" id="newNoteForm" onsubmit="createNote(); return false">
                     <label for="noteTitle"><b>Note Title</b></label>
                     <input type="text" placeholder="Enter Note Title" id="newNoteTitle" required>
                     <br></br>
                     <label for="content"><b>Content</b></label>
                     <input type="content" placeholder="Enter Content" id="newNoteContent" required>
-
-                </div>
+                    <br></br>
+                    <input type="submit" id="newNoteSubmit" class="btn btn-primary" value="Create">
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" id="newNoteSubmit" class="btn btn-primary">Create Note</button>
             </div>
         </div>
     </div>

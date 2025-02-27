@@ -4,11 +4,9 @@ body {
 }
 
 h1 {
-    color: red;
     font-size: 2rem;
 }
 
 #registerSubmit {
     background-color: grey;
-    color: black;
 }

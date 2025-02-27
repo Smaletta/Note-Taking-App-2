@@ -1,6 +1,6 @@
-const errorHandler = (err, req, res, next) => {
-    const status = err.status || 500;
-    const message = err.message || 'Internal Server Error';
+const errorHandler = (error, req, res, next) => {
+    const status = error.status || 500;
+    const message = error.message || 'Internal Server Error';
     // Log the error for debugging purposes
     console.error(`[Error] ${status} - ${message}`);
     // Respond to the client
