@@ -1,4 +1,5 @@
 const URL = "http://localhost:3001"
+const token = document.cookie.split("=")[1]
 
 // Confirm Password for registration before posting to /register
 
@@ -6,12 +7,12 @@ async function passwordMatch() {
     const user = document.getElementById("registerUsername").value
     const password = document.getElementById("registerPassword").value
     const confirmPassword = document.getElementById("registerConfirmPassword").value
-    try {
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        } else {
-            fetch(`${URL}/api/notes/register`, {
+    if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    } else {
+        try {
+            const response = await fetch(`${URL}/api/notes/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -21,11 +22,14 @@ async function passwordMatch() {
                     password: password
                 })
             })
-            alert("Registration successful. Redirecting to home page...");
-            window.location.replace("/");
+            alert(`${(await response.text())}`);
+            if (response.ok) {
+                window.location.replace("/")
+            };
         }
-    } catch (error) {
-        console.error(error);
+        catch (error) {
+            console.error(error);
+        }
     }
 }
 
@@ -35,21 +39,26 @@ async function passwordMatch() {
 async function login() {
     const user = document.getElementById("loginUsername").value
     const password = document.getElementById("loginPassword").value
-    event.preventDefault();
     try {
-        fetch(`${URL}/api/notes/login`, {
+        const response = await fetch(`${URL}/api/notes/login`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 username: user,
                 password: password
             })
         })
-        console.log("Login successful. Redirecting to home page...");
-        alert("Login successful. Redirecting to home page...");
-        window.location.replace("/user/:id");
+        alert(`${(await response.text())}`);
+        if (response.ok) {
+            fetch(`/user/${user}`), {
+                method: "GET"                
+            }
+            window.location.replace(`/user/${user}`)
+
+        };
 
     } catch (error) {
         console.error(error);

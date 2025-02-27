@@ -48,7 +48,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-control" id="loginForm" onsubmit=login()>
+                <form class="form-control" id="loginForm" onsubmit="login(); return false">
                     <label for="username"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" id="loginUsername" name="username" required>
                     <br></br>
