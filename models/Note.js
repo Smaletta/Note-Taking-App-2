@@ -4,6 +4,9 @@ const noteSchema = new mongoose.Schema({
     title: {
         type: String, required: true
     },
+    titlePreview: {
+        type: String, trim: true
+    },
     content: {
         type: String, required: true, trim: true
     },
@@ -15,6 +18,12 @@ const noteSchema = new mongoose.Schema({
     }
     
 }, {timestamps: true});
+
+// pre middleware to save preview text from title
+noteSchema.pre('save', function (next) {
+    this.titlePreview = this.title.substring(0, 50);
+    next();
+});
 
 // pre middleware to save preview text from content
 noteSchema.pre('save', function (next) {

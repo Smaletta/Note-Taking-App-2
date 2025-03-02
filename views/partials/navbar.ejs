@@ -1,11 +1,11 @@
 <div class="container-fluid fixed-top text-center p-3 bg-white border-bottom border-2">
     <h1>Note Taking App</h1>
-    <input type="hidden" id="userHome" value = "<%= `${username}` %>">
     <div class="list-group list-group-horizontal">
         <%if (!loggedIn) { %>
             <a href="/" class="btn btn-primary" role="button">Home</a>
             <% } else { %>
                 <a href= <%= `/user/${username}` %> class="btn btn-primary" role="button">Notes</a>
+                <input type="hidden" id="userHome" value = "<%= `${username}` %>">
                 <% } %>
                     <% if (!loggedIn) { %>
                         <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
