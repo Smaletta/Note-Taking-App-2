@@ -1,4 +1,5 @@
-const URL = "http://localhost:3001";
+const PORT = 5000
+const URL = `http://localhost:${PORT}`;
 const token = document.cookie.split("=")[1];
 
 // Confirm Password for registration before posting to /register

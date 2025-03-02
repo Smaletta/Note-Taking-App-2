@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
+// Register user
 const registerUser = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -20,6 +21,7 @@ const registerUser = async (req, res) => {
     }
 };
 
+// Login user
 const loginUser = async (req, res) => {
     try {
         const {username , password } = req.body;
