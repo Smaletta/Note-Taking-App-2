@@ -5,18 +5,19 @@ const isAuthenticated = (req, res, next) => {
   if (!token) {
     const error = new Error("Unauthorized: No token provided");
     error.statuscode = 401;
-    res.render('index', { error });
+    res.render('index', { error, notes: [], loggedIn: false });
     return next(error);
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
+    req.loggedIn = true;
     next();
   } catch (error) {
     error.message = "Invalid token";
     error.statuscode = 403;
-    res.render('index', { error });
+    res.render('index', { error, notes: [], loggedIn: false });
     return next(error);
   }
 };

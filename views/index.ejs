@@ -12,7 +12,6 @@
 
 <body>
     <%- include('partials/navbar') %>
-
         <div class="container mt-5 pt-5">
             <h1 class="mt-5 text-center">Notes</h1>
             <% if (typeof error !=="undefined" ) { %>
@@ -22,21 +21,27 @@
                     </h3>
                 </div>
                 <% } %>
-                    <div class="row">
-                        <% notes.forEach(note=> { %>
-                            <div class="col-md-4 mb-4">
-                                <div class="card" id="<%= note.id %>">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <%= note.title %>
-                                        </h5>
-                                        <p class="card-text">
-                                            <%= note.content %>
-                                        </p>
+                    <div id="content">
+                        <div class="row">
+                            <% notes.forEach(note=> { %>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100" id="<%= note.id %>">
+                                        <a class="card-body" href="/note/<%= note.id %>">
+                                            <h5 class="card-title text-center">
+                                                <%= note.title %>
+                                            </h5>
+                                            <p class="card-text">
+                                                <%= note.content %>
+                                            </p>
+                                        </a>
+                                        <input type="hidden" id="userHome" value = "<%= `${username}` %>">
+                                        <button class="btn btn-danger float-end" value="<%= note.id %>"
+                                            onclick="deleteNote(value); return false">Delete</button>
                                     </div>
                                 </div>
-                            </div>
-                            <% }) %>
+                                <% }) %>
+                        </div>
+
                     </div>
         </div>
 

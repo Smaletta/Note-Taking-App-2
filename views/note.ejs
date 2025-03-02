@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+        <div class="container mt-5 pt-5">
+            <% if (typeof error !=="undefined" ) { %>
+                <div class="alert alert-danger text-center text-bg-danger" id="message-warning">
+                    <h3>
+                        <%= error.message %>
+                    </h3>
+                </div>
+                <% } %>
+                    <div id="content">
+                        <div class="row">
+                            <div class="container-fluid">
+                                <form class="form control mt-5 pt-5" id="<%= note.id %>" onsubmit="updateNote(id); return false;">
+                                    <h1 class="title">
+                                        <input type="text" class="form-control form-control-lg align-items-center text-center text-decoration-underline p-2" id="noteTitle" value="<%= note.title %>" disabled="true">
+                                    </h1>
+                                    <div class="content">
+                                        <textarea  class="form-control" type="text" class="form-control p-2" rows="8" id= "noteContent" name="noteContent" disabled="true"><%= note.content %></textarea>
+                                    </div>
+                                    <div class="p-2">
+                                    <input type="hidden" id="noteId" value="<%= note.id %>">
+                                    <input type="hidden" id="noteUser" value="<%= note.user %>">
+                                    <input type="hidden" id="userHome" value = "<%= `${username}` %>">
+                                    <input type="submit" class="btn btn-primary float-left" name="update" value="Update" disabled="true">
+                                    <button type="button" class="btn btn-primary center" onclick="editNote(); return false;">Edit</button>
+                                    <button type="button" class="btn btn-danger float-end" value="<%= note.id %>" onclick="deleteNote(value); return false;">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+        </div>
+
+        <%- include('partials/footer') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/script.js"></script>
+</body>
+
+</html>

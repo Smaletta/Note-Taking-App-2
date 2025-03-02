@@ -1,33 +1,48 @@
 <div class="container-fluid fixed-top text-center p-3 bg-white border-bottom border-2">
     <h1>Note Taking App</h1>
     <div class="list-group list-group-horizontal">
-        <a href="/" class="btn btn-primary" role="button">Home</a>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newNoteModal">
-            New Note
-        </button>
-        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#loginModal">
-            Login/Register
-        </button>
+        <%if (!loggedIn) { %>
+            <a href="/" class="btn btn-primary" role="button">Home</a>
+            <% } else { %>
+                <a href= <%= `/user/${username}` %> class="btn btn-primary" role="button">Notes</a>
+                <% } %>
+                    <% if (!loggedIn) { %>
+                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">
+                            Login/Register
+                        </button>
+                        <% } else { %>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#newNoteModal">
+                                New Note
+                            </button>
+                            <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#logoutModal">
+                                Logout
+                            </button>
+                            <% } %>
 
     </div>
 </div>
 
 <!-- New Note Modal -->
 
-<div class="modal fade" id="newNoteModal" tabindex="-1" aria-labelledby="newNoteModalLabel" aria-hidden="true">
+<div class="modal fade" id="newNoteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newNoteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="newNoteModalLabel">New Note</h1>
+                <h1 class="modal-title" id="newNoteModalLabel">New Note</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-control" id="newNoteForm" onsubmit="createNote(); return false">
-                    <label for="noteTitle"><b>Note Title</b></label>
-                    <input type="text" placeholder="Enter Note Title" id="newNoteTitle" required>
+                <form class="form-control w-auto" id="newNoteForm" onsubmit="createNote(); return false">
+                    <label class="form-label" for="noteTitle"><b>Note Title</b></label>
                     <br></br>
-                    <label for="content"><b>Content</b></label>
-                    <input type="content" placeholder="Enter Content" id="newNoteContent" required>
+                    <input class="form-control" type="text" placeholder="Enter Note Title" id="newNoteTitle" required>
+                    <br></br>
+                    <label class="form-label" for="content"><b>Content</b></label>
+                    <br></br>
+                    <textarea class="form-control" type="content" placeholder="Enter Content" name="newNoteContent" rows="5" required></textarea>
                     <br></br>
                     <input type="submit" id="newNoteSubmit" class="btn btn-primary" value="Create">
                 </form>
@@ -49,11 +64,11 @@
             </div>
             <div class="modal-body">
                 <form class="form-control" id="loginForm" onsubmit="login(); return false">
-                    <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" id="loginUsername" name="username" required>
+                    <label class="form-label" for="username"><b>Username</b></label>
+                    <input class="form-control" type="text" placeholder="Enter Username" id="loginUsername" name="username" minlength="3" required>
                     <br></br>
-                    <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" id="loginPassword" name="password" required>
+                    <label class="form-label" for="password"><b>Password</b></label>
+                    <input class="form-control" type="password" placeholder="Enter Password" id="loginPassword" name="password" minlength="6" required>
                     <br></br>
                     <input type="submit" id="loginSubmit" class="btn btn-primary" value="Login">
                 </form>
@@ -68,7 +83,7 @@
 
 <!-- Register Modal -->
 
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -76,17 +91,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-control" id="registerForm" onsubmit= "passwordMatch(); return false">
-                    <label for="username"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" id="registerUsername" name="username" required>
+                <form class="form-control" id="registerForm" onsubmit="passwordMatch(); return false">
+                    <label class="form-label" for="username"><b>Username</b></label>
+                    <input class="form-control" type="text" placeholder="Enter Username" id="registerUsername" name="username" minlength="3" required>
                     <br></br>
-                    <label for="password"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" id="registerPassword" name="password" required>
+                    <label class="form-label" for="password"><b>Password</b></label>
+                    <input class="form-control" type="password" placeholder="Enter Password" id="registerPassword" name="password" minlength="6" required>
                     <br></br>
-                    <label for="confirmPassword"><b>Confirm Password</b></label>
-                    <input type="password" placeholder="Confirm Password" id="registerConfirmPassword" name="confirmPassword" required>
+                    <label class="form-label" for="confirmPassword"><b>Confirm Password</b></label>
+                    <input class="form-control" type="password" placeholder="Confirm Password" id="registerConfirmPassword" name="confirmPassword" minlength="6" required>
                     <br></br>
                     <input type="submit" id="registerSubmit" class="btn btn-primary" value="Register">
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Modal -->
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="logoutModalLabel">Logout</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-control" id="logoutForm" onsubmit="logout(); return false">
+                    <input type="submit" id="logoutSubmit" class="btn btn-primary" value="Logout">
+                    <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
             <div class="modal-footer">

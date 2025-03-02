@@ -8,4 +8,11 @@ router.post('/register', registerUser);
 // Route to login a user
 router.post('/login', loginUser);
 
+// Route to logout a user
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+    });
+
+
 module.exports = router;

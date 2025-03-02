@@ -1,23 +1,25 @@
 const User = require('../models/User');
 const Note = require('../models/Note');
 const jwt = require('jsonwebtoken');
+const {ObjectId} = require('mongodb');
 
 require('dotenv').config();
 // Retrieve all notes by a user
 
 const findNotesbyUserId = async (req, res) => {
     try {
-
+        const loggedIn = req.loggedIn;
+        const username = req.user.username;
         if (req.user.username !== req.params.id) {
             const error = new Error("Unauthorized: Incorrect username");
             error.statuscode = 401;
-            res.render('index', { error, notes: [] });
+            res.render('index', { error, notes: [], loggedIn, username });
             return (error);
           }
 
         const notes = await Note.find({ user: req.user.id });
-        console.log(notes);
-        res.render('index', { notes });
+
+        res.render('index', { notes, loggedIn, username });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -39,10 +41,21 @@ const createNote = async (req, res) => {
 const getNoteById = async (req, res) => {
     try {
         const note = await Note.findById(req.params.id);
+        const loggedIn = req.loggedIn;
+        const username = req.user.username;
         if (!note) {
-            return res.status(404).json({ error: 'Note not found' });
+            const error = new Error("Note not found");
+            error.statuscode = 404;
+            res.render('index', { error, notes: [], loggedIn, username });
+            return (error);            
         }
-        res.status(200).json(note);
+        if (req.user.id !== note.user.toString()) {
+            const error = new Error("Unauthorized: Incorrect username");
+            error.statuscode = 401;
+            res.render('index', { error, notes: [], loggedIn, username });
+            return (error);
+          }
+        res.render('note', { note, loggedIn, username });        
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -52,16 +65,16 @@ const getNoteById = async (req, res) => {
 const updateNote = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description } = req.body;
+        const { title, content } = req.body;
         const note = await Note.findByIdAndUpdate(
             id,
-            { title, description },
+            { title, content },
             { new: true }
         );
         if (!note) {
             return res.status(404).json({ error: 'Note not found' });
         }
-        res.status(200).json(note);
+        res.status(200).json({ message: 'Note updated successfully', note });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -74,7 +87,7 @@ const deleteNote = async (req, res) => {
         if (!note) {
             return res.status(404).json({ error: 'Note not found' });
         }
-        res.status(200).json({ message: 'Note deleted' });
+        res.status(200).json({ message: 'Note deleted' });  
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
