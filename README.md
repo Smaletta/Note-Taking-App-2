@@ -23,8 +23,12 @@ This server provides RESTful APIs for creating, reading, updating, and deleting 
 
 1. Clone the repository
 2. Install dependencies using `npm install`
-3. Create a `.env` file with your MongoDB connection string and other environment variables
-4. Start the server using `npm start`
+3. Create a `.env` file with:
+  -PORT = number
+  -MONGODB_URI = your mongoDB route
+  -JWT_SECRET = string
+  -JWT_EXPIRES_IN = number (in ms)
+5. Start the server using `npm start`
 
 ## API Endpoints
 ----------------
