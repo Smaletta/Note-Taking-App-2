@@ -33,7 +33,6 @@
                                     <div class="p-2">
                                     <input type="hidden" id="noteId" value="<%= note.id %>">
                                     <input type="hidden" id="noteUser" value="<%= note.user %>">
-                                    <input type="hidden" id="userHome" value = "<%= `${username}` %>">
                                     <input type="submit" class="btn btn-primary float-left" name="update" value="Update" disabled="true">
                                     <button type="button" class="btn btn-primary center" onclick="editNote(); return false;">Edit</button>
                                     <button type="button" class="btn btn-danger float-end" value="<%= note.id %>" onclick="deleteNote(value); return false;">Delete</button>
