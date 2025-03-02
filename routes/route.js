@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     res.render('index', { notes: [], loggedIn: false });
 });
 
-// User logged in route: Authenticate user and Display Minimized Notes and Controls to create/update/delete notes
+// User logged in route: Authenticate user and Display Minimized Notes and Controls to create/read/delete notes
 
 router.get('/user/:id', isAuthenticated, (req, res) => {
     findNotesbyUserId(req, res); 

@@ -12,7 +12,7 @@ async function passwordMatch() {
         return;
     } else {
         try {
-            const response = await fetch(`${URL}/api/notes/register`, {
+            const response = await fetch(`${URL}/auth/notes/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -40,7 +40,7 @@ async function login() {
     const user = document.getElementById("loginUsername").value
     const password = document.getElementById("loginPassword").value
     try {
-        const response = await fetch(`${URL}/api/notes/login`, {
+        const response = await fetch(`${URL}/auth/notes/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -145,7 +145,7 @@ async function updateNote(req) {
 
 async function logout() {
     try {
-        const response = await fetch(`${URL}/api/notes/logout`, {
+        const response = await fetch(`${URL}/auth/notes/logout`, {
             method: "GET"
         })
         if (response.ok) {
