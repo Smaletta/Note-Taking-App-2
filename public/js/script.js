@@ -54,7 +54,7 @@ async function login() {
         alert(`${(JSON.parse(await response.text())).message}`);
         if (response.ok)
             window.location.replace(`/user/${user}`)
-        } catch (error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -65,6 +65,7 @@ async function login() {
 async function createNote() {
     const title = document.getElementById("newNoteTitle").value;
     const content = document.getElementById("newNoteContent").value;
+    const username = document.getElementById("userHome").value;
     try {
         const response = await fetch(`${URL}/create`, {
             method: "POST",
@@ -76,12 +77,13 @@ async function createNote() {
                 content: content
             })
         })
-        alert(`${(JSON.parse(await response.text())).message}`);
         if (response.ok) {
-            window.location.reload();
+            alert(`${(JSON.parse(await response.text())).message}`);
+            window.location.replace(`/user/${username}`);
 
         };
     } catch (error) {
+        window.location.replace(`/user/${username}`);
         console.error(error);
     }
 }
@@ -103,6 +105,7 @@ async function deleteNote(req) {
             window.location.replace(`/user/${username}`);
         };
     } catch (error) {
+        window.location.replace(`/user/${username}`);
         console.error(error);
     }
 }
@@ -138,6 +141,7 @@ async function updateNote(req) {
             window.location.replace(`/user/${username}`)
         };
     } catch (error) {
+        window.location.replace(`/user/${username}`);
         console.error(error);
     }
 }
